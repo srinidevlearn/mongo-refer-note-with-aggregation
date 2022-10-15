@@ -1,0 +1,984 @@
+<template><div><ul class="task-list-container">
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" id="task-item-0" disabled="disabled"><label class="task-list-item-label" for="task-item-0"> Insert userInfo to DB</label></li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" id="task-item-1" disabled="disabled"><label class="task-list-item-label" for="task-item-1"> Insert employeePayRoll to DB</label></li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" id="task-item-2" disabled="disabled"><label class="task-list-item-label" for="task-item-2"> Insert userWorkInfo to DB</label></li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" id="task-item-3" disabled="disabled"><label class="task-list-item-label" for="task-item-3"> After inserting separately try to find out payroll calculation using aggregations</label></li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" id="task-item-4" disabled="disabled"><label class="task-list-item-label" for="task-item-4"> Joins three tables</label></li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" id="task-item-5" disabled="disabled"><label class="task-list-item-label" for="task-item-5"> Check output matched expected output</label></li>
+</ul>
+<CodeTabs id="32" :data='[{"title":"userInfo"},{"title":"userWorkInfo"},{"title":"employeePayRoll"},{"title":"expected Output"}]' :active="0" tab-id="shell">
+
+<template #tab0="{ title, value, isActive }">
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">1.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Leanne Graham"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Bret"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Sincere@april.biz"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Kulas Light"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Apt. 556"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"Gwenborough"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"92998-3874"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"-37.3159"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"81.1496"</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"1-770-736-8031 x56442"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">2.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Ervin Howell"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Antonette"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Shanna@melissa.tv"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Victor Plains"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Suite 879"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"Wisokyburgh"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"90566-7771"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"-43.9509"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"-34.4618"</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"010-692-6593 x09125"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">3.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Clementine Bauch"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Samantha"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Nathan@yesenia.net"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Douglas Extension"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Suite 847"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"McKenziehaven"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"59590-4157"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"-68.6102"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"-47.0653"</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"1-463-123-4447"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">5.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Chelsey Dietrich"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Kamren"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Lucio_Hettinger@annie.ca"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Skiles Walks"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Suite 351"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"Roscoeview"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"33263"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"-31.8129"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"62.5342"</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"(254)954-1289"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">6.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Mrs. Dennis Schulist"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Leopoldo_Corkery"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Karley_Dach@jasper.info"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Norberto Crossing"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Apt. 950"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"South Christy"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"23505-1337"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"-71.4197"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"71.7478"</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"1-477-935-8478 x6430"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">8.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Nicholas Runolfsdottir V"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Maxime_Nienow"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Sherwood@rosamond.me"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Ellsworth Summit"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Suite 729"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"Aliyaview"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"45169"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"-14.3990"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"-120.7677"</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"586.493.6943 x140"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">4.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Patricia Lebsack"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Karianne"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Julianne.OConner@kory.org"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Hoeger Mall"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Apt. 692"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"South Elvis"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"53919-4257"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"29.4572"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"-164.2990"</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"493-170-9623 x156"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">9.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Glenna Reichert"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Delphine"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Chaim_McDermott@dana.io"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Dayna Park"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Suite 449"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"Bartholomebury"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"76495-3109"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"24.6463"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"-168.8889"</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"(775)976-6794 x41206"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">7.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Kurtis Weissnat"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Elwyn.Skiles"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Telly.Hoeger@billy.biz"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Rex Trail"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Suite 280"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"Howemouth"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"58804-1099"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"24.8918"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"21.8984"</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"210.067.6132"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">10.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Clementina DuBuque"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Moriah.Stanton"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Rey.Padberg@karina.biz"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Kattie Turnpike"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Suite 198"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"Lebsackbury"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"31428-2261"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"-38.2386"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"57.2232"</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"024-648-3804"</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></template>
+<template #tab1="{ title, value, isActive }">
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">2.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"anastasia.net"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Deckow-Crist"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"Proactive didactic contingency"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"synergize scalable supply-chains"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"B"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">10.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"ambrose.net"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Hoeger LLC"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"Centralized empowering task-force"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"target end-to-end models"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"B"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">4.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"kale.biz"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Robel-Corkery"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"Multi-tiered zero tolerance productivity"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"transition cutting-edge web services"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"A"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">6.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"ola.org"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Considine-Lockman"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"Synchronised bottom-line interface"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"e-enable innovative applications"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"C"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">9.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"conrad.com"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Yost and Sons"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"Switchable contextually-based project"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"aggregate real-time technologies"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"C"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">7.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"elvis.io"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Johns Group"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"Configurable multimedia task-force"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"generate enterprise e-tailers"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"B"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">3.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"ramiro.info"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Romaguera-Jacobson"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"Face to face bifurcated interface"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"e-enable strategic applications"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"C"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">5.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"demarco.info"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Keebler LLC"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"User-centric fault-tolerant solution"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"revolutionize end-to-end systems"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"B"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">1.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"hildegard.org"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Romaguera-Crona"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"Multi-layered client-server neural-net"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"harness real-time e-markets"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"A"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">8.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"jacynthe.com"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Abernathy Group"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"Implemented secondary concept"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"e-enable extensible e-tailers"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"A"</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></template>
+<template #tab2="{ title, value, isActive }">
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"A"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">1.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">500000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"variable"</span><span class="token operator">:</span> <span class="token number">0.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"pf"</span><span class="token operator">:</span> <span class="token number">12.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"hra"</span><span class="token operator">:</span> <span class="token number">8.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">15000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"basic"</span><span class="token operator">:</span> <span class="token number">50.0</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"C"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">3.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">1500000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"variable"</span><span class="token operator">:</span> <span class="token number">10.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"pf"</span><span class="token operator">:</span> <span class="token number">12.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"hra"</span><span class="token operator">:</span> <span class="token number">24.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">30000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"basic"</span><span class="token operator">:</span> <span class="token number">40.0</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"B"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">5.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">1000000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"variable"</span><span class="token operator">:</span> <span class="token number">7.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"pf"</span><span class="token operator">:</span> <span class="token number">12.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"hra"</span><span class="token operator">:</span> <span class="token number">16.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">30000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"basic"</span><span class="token operator">:</span> <span class="token number">50.0</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"B"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">7.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">1000000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"variable"</span><span class="token operator">:</span> <span class="token number">7.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"pf"</span><span class="token operator">:</span> <span class="token number">12.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"hra"</span><span class="token operator">:</span> <span class="token number">16.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">30000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"basic"</span><span class="token operator">:</span> <span class="token number">50.0</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"A"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">4.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">500000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"variable"</span><span class="token operator">:</span> <span class="token number">0.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"pf"</span><span class="token operator">:</span> <span class="token number">12.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"hra"</span><span class="token operator">:</span> <span class="token number">8.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">15000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"basic"</span><span class="token operator">:</span> <span class="token number">50.0</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"B"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">2.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">1000000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"variable"</span><span class="token operator">:</span> <span class="token number">7.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"pf"</span><span class="token operator">:</span> <span class="token number">12.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"hra"</span><span class="token operator">:</span> <span class="token number">16.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">30000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"basic"</span><span class="token operator">:</span> <span class="token number">50.0</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"C"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">6.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">1500000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"variable"</span><span class="token operator">:</span> <span class="token number">10.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"pf"</span><span class="token operator">:</span> <span class="token number">12.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"hra"</span><span class="token operator">:</span> <span class="token number">24.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">30000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"basic"</span><span class="token operator">:</span> <span class="token number">40.0</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"A"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">8.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">500000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"variable"</span><span class="token operator">:</span> <span class="token number">0.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"pf"</span><span class="token operator">:</span> <span class="token number">12.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"hra"</span><span class="token operator">:</span> <span class="token number">8.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">15000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"basic"</span><span class="token operator">:</span> <span class="token number">50.0</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"C"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">9.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">1500000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"variable"</span><span class="token operator">:</span> <span class="token number">10.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"pf"</span><span class="token operator">:</span> <span class="token number">12.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"hra"</span><span class="token operator">:</span> <span class="token number">24.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">30000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"basic"</span><span class="token operator">:</span> <span class="token number">40.0</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"B"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">10.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">1000000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"variable"</span><span class="token operator">:</span> <span class="token number">7.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"pf"</span><span class="token operator">:</span> <span class="token number">12.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"hra"</span><span class="token operator">:</span> <span class="token number">16.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">30000.0</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"basic"</span><span class="token operator">:</span> <span class="token number">50.0</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></template>
+<template #tab3="{ title, value, isActive }">
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"A"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"basicAnnualCalc"</span><span class="token operator">:</span> <span class="token number">250000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">500000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuityAnnualCalc"</span><span class="token operator">:</span> <span class="token number">24000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"hraAnnualCalc"</span><span class="token operator">:</span> <span class="token number">40000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">15000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"otherAnnualCalc"</span><span class="token operator">:</span> <span class="token number">111000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"pfAnnualCalc"</span><span class="token operator">:</span> <span class="token number">60000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"totalAnnualEstimate"</span><span class="token operator">:</span> <span class="token number">500000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"A"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"harness real-time e-markets"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"Multi-layered client-server neural-net"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Romaguera-Crona"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"hildegard.org"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userWorkInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"Gwenborough"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"-37.3159"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"81.1496"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Kulas Light"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Apt. 556"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"92998-3874"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Sincere@april.biz"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Leanne Graham"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"1-770-736-8031 x56442"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Bret"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"variableAnnualCalc"</span><span class="token operator">:</span> <span class="token number">0</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"C"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"basicAnnualCalc"</span><span class="token operator">:</span> <span class="token number">600000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">1.5e+06</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuityAnnualCalc"</span><span class="token operator">:</span> <span class="token number">72000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"hraAnnualCalc"</span><span class="token operator">:</span> <span class="token number">360000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">30000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"otherAnnualCalc"</span><span class="token operator">:</span> <span class="token number">108000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"pfAnnualCalc"</span><span class="token operator">:</span> <span class="token number">180000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"totalAnnualEstimate"</span><span class="token operator">:</span> <span class="token number">1.5e+06</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"C"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"e-enable strategic applications"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"Face to face bifurcated interface"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Romaguera-Jacobson"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"ramiro.info"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userWorkInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"McKenziehaven"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"-68.6102"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"-47.0653"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Douglas Extension"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Suite 847"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"59590-4157"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Nathan@yesenia.net"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Clementine Bauch"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"1-463-123-4447"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Samantha"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"variableAnnualCalc"</span><span class="token operator">:</span> <span class="token number">150000</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"B"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"basicAnnualCalc"</span><span class="token operator">:</span> <span class="token number">500000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">1e+06</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuityAnnualCalc"</span><span class="token operator">:</span> <span class="token number">48000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"hraAnnualCalc"</span><span class="token operator">:</span> <span class="token number">160000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">30000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"otherAnnualCalc"</span><span class="token operator">:</span> <span class="token number">72000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"pfAnnualCalc"</span><span class="token operator">:</span> <span class="token number">120000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"totalAnnualEstimate"</span><span class="token operator">:</span> <span class="token number">1e+06</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"B"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"revolutionize end-to-end systems"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"User-centric fault-tolerant solution"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Keebler LLC"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"demarco.info"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userWorkInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"Roscoeview"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"-31.8129"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"62.5342"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Skiles Walks"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Suite 351"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"33263"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Lucio_Hettinger@annie.ca"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Chelsey Dietrich"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"(254)954-1289"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Kamren"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"variableAnnualCalc"</span><span class="token operator">:</span> <span class="token number">70000</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"B"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"basicAnnualCalc"</span><span class="token operator">:</span> <span class="token number">500000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">1e+06</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuityAnnualCalc"</span><span class="token operator">:</span> <span class="token number">48000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"hraAnnualCalc"</span><span class="token operator">:</span> <span class="token number">160000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">7</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">30000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"otherAnnualCalc"</span><span class="token operator">:</span> <span class="token number">72000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"pfAnnualCalc"</span><span class="token operator">:</span> <span class="token number">120000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"totalAnnualEstimate"</span><span class="token operator">:</span> <span class="token number">1e+06</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"B"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"generate enterprise e-tailers"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"Configurable multimedia task-force"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Johns Group"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">7</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"elvis.io"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userWorkInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"Howemouth"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"24.8918"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"21.8984"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Rex Trail"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Suite 280"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"58804-1099"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Telly.Hoeger@billy.biz"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">7</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Kurtis Weissnat"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"210.067.6132"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Elwyn.Skiles"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"variableAnnualCalc"</span><span class="token operator">:</span> <span class="token number">70000</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"A"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"basicAnnualCalc"</span><span class="token operator">:</span> <span class="token number">250000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">500000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuityAnnualCalc"</span><span class="token operator">:</span> <span class="token number">24000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"hraAnnualCalc"</span><span class="token operator">:</span> <span class="token number">40000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">15000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"otherAnnualCalc"</span><span class="token operator">:</span> <span class="token number">111000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"pfAnnualCalc"</span><span class="token operator">:</span> <span class="token number">60000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"totalAnnualEstimate"</span><span class="token operator">:</span> <span class="token number">500000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"A"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"transition cutting-edge web services"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"Multi-tiered zero tolerance productivity"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Robel-Corkery"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"kale.biz"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userWorkInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"South Elvis"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"29.4572"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"-164.2990"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Hoeger Mall"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Apt. 692"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"53919-4257"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Julianne.OConner@kory.org"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Patricia Lebsack"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"493-170-9623 x156"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Karianne"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"variableAnnualCalc"</span><span class="token operator">:</span> <span class="token number">0</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"B"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"basicAnnualCalc"</span><span class="token operator">:</span> <span class="token number">500000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">1e+06</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuityAnnualCalc"</span><span class="token operator">:</span> <span class="token number">48000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"hraAnnualCalc"</span><span class="token operator">:</span> <span class="token number">160000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">30000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"otherAnnualCalc"</span><span class="token operator">:</span> <span class="token number">72000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"pfAnnualCalc"</span><span class="token operator">:</span> <span class="token number">120000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"totalAnnualEstimate"</span><span class="token operator">:</span> <span class="token number">1e+06</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"B"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"synergize scalable supply-chains"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"Proactive didactic contingency"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Deckow-Crist"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"anastasia.net"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userWorkInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"Wisokyburgh"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"-43.9509"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"-34.4618"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Victor Plains"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Suite 879"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"90566-7771"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Shanna@melissa.tv"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Ervin Howell"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"010-692-6593 x09125"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Antonette"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"variableAnnualCalc"</span><span class="token operator">:</span> <span class="token number">70000</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"C"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"basicAnnualCalc"</span><span class="token operator">:</span> <span class="token number">600000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">1.5e+06</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuityAnnualCalc"</span><span class="token operator">:</span> <span class="token number">72000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"hraAnnualCalc"</span><span class="token operator">:</span> <span class="token number">360000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">6</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">30000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"otherAnnualCalc"</span><span class="token operator">:</span> <span class="token number">108000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"pfAnnualCalc"</span><span class="token operator">:</span> <span class="token number">180000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"totalAnnualEstimate"</span><span class="token operator">:</span> <span class="token number">1.5e+06</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"C"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"e-enable innovative applications"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"Synchronised bottom-line interface"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Considine-Lockman"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">6</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"ola.org"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userWorkInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"South Christy"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"-71.4197"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"71.7478"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Norberto Crossing"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Apt. 950"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"23505-1337"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Karley_Dach@jasper.info"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">6</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Mrs. Dennis Schulist"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"1-477-935-8478 x6430"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Leopoldo_Corkery"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"variableAnnualCalc"</span><span class="token operator">:</span> <span class="token number">150000</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"A"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"basicAnnualCalc"</span><span class="token operator">:</span> <span class="token number">250000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">500000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuityAnnualCalc"</span><span class="token operator">:</span> <span class="token number">24000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"hraAnnualCalc"</span><span class="token operator">:</span> <span class="token number">40000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">8</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">15000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"otherAnnualCalc"</span><span class="token operator">:</span> <span class="token number">111000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"pfAnnualCalc"</span><span class="token operator">:</span> <span class="token number">60000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"totalAnnualEstimate"</span><span class="token operator">:</span> <span class="token number">500000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"A"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"e-enable extensible e-tailers"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"Implemented secondary concept"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Abernathy Group"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">8</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"jacynthe.com"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userWorkInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"Aliyaview"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"-14.3990"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"-120.7677"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Ellsworth Summit"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Suite 729"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"45169"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Sherwood@rosamond.me"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">8</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Nicholas Runolfsdottir V"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"586.493.6943 x140"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Maxime_Nienow"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"variableAnnualCalc"</span><span class="token operator">:</span> <span class="token number">0</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"C"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"basicAnnualCalc"</span><span class="token operator">:</span> <span class="token number">600000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">1.5e+06</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuityAnnualCalc"</span><span class="token operator">:</span> <span class="token number">72000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"hraAnnualCalc"</span><span class="token operator">:</span> <span class="token number">360000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">9</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">30000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"otherAnnualCalc"</span><span class="token operator">:</span> <span class="token number">108000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"pfAnnualCalc"</span><span class="token operator">:</span> <span class="token number">180000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"totalAnnualEstimate"</span><span class="token operator">:</span> <span class="token number">1.5e+06</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"C"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"aggregate real-time technologies"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"Switchable contextually-based project"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Yost and Sons"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">9</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"conrad.com"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userWorkInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"Bartholomebury"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"24.6463"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"-168.8889"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Dayna Park"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Suite 449"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"76495-3109"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Chaim_McDermott@dana.io"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">9</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Glenna Reichert"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"(775)976-6794 x41206"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Delphine"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"variableAnnualCalc"</span><span class="token operator">:</span> <span class="token number">150000</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"B"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"basicAnnualCalc"</span><span class="token operator">:</span> <span class="token number">500000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"ctc"</span><span class="token operator">:</span> <span class="token number">1e+06</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuity"</span><span class="token operator">:</span> <span class="token number">4.8</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"gratuityAnnualCalc"</span><span class="token operator">:</span> <span class="token number">48000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"hraAnnualCalc"</span><span class="token operator">:</span> <span class="token number">160000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"lta"</span><span class="token operator">:</span> <span class="token number">30000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"otherAnnualCalc"</span><span class="token operator">:</span> <span class="token number">72000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"pfAnnualCalc"</span><span class="token operator">:</span> <span class="token number">120000</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"totalAnnualEstimate"</span><span class="token operator">:</span> <span class="token number">1e+06</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"band"</span><span class="token operator">:</span> <span class="token string">"B"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"company"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"bs"</span><span class="token operator">:</span> <span class="token string">"target end-to-end models"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"catchPhrase"</span><span class="token operator">:</span> <span class="token string">"Centralized empowering task-force"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Hoeger LLC"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"website"</span><span class="token operator">:</span> <span class="token string">"ambrose.net"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"userWorkInfo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"city"</span><span class="token operator">:</span> <span class="token string">"Lebsackbury"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"geo"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token string-property property">"lat"</span><span class="token operator">:</span> <span class="token string">"-38.2386"</span><span class="token punctuation">,</span>
+          <span class="token string-property property">"lng"</span><span class="token operator">:</span> <span class="token string">"57.2232"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"street"</span><span class="token operator">:</span> <span class="token string">"Kattie Turnpike"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"suite"</span><span class="token operator">:</span> <span class="token string">"Suite 198"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"zipcode"</span><span class="token operator">:</span> <span class="token string">"31428-2261"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"email"</span><span class="token operator">:</span> <span class="token string">"Rey.Padberg@karina.biz"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"id"</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"name"</span><span class="token operator">:</span> <span class="token string">"Clementina DuBuque"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"phone"</span><span class="token operator">:</span> <span class="token string">"024-648-3804"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"Moriah.Stanton"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"variableAnnualCalc"</span><span class="token operator">:</span> <span class="token number">70000</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></template>
+</CodeTabs>
+<details class="custom-container details"><summary>For Cross Verification</summary>
+<div class="custom-container info">
+<p class="custom-container-title">Info</p>
+<p>Query Output of below can be verified at <a href="https://mongoplayground.net/p/hCGYQiM1JCO" target="_blank" rel="noopener noreferrer">here<ExternalLinkIcon/></a></p>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code>db.employeePayRoll.aggregate<span class="token punctuation">(</span><span class="token punctuation">[</span>
+<span class="token punctuation">{</span>
+  <span class="token variable">$addFields</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+    variableAnnualCalc: <span class="token punctuation">{</span>
+      <span class="token variable">$multiply</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"<span class="token variable">$ctc</span>"</span>,
+        <span class="token punctuation">{</span>
+          <span class="token variable">$divide</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+            <span class="token string">"c"</span>,
+            <span class="token number">100</span>
+          <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>,
+    gratuityAnnualCalc: <span class="token punctuation">{</span>
+      <span class="token variable">$multiply</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"<span class="token variable">$ctc</span>"</span>,
+        <span class="token punctuation">{</span>
+          <span class="token variable">$divide</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+            <span class="token string">"<span class="token variable">$gratuity</span>"</span>,
+            <span class="token number">100</span>
+          <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>,
+    pfAnnualCalc: <span class="token punctuation">{</span>
+      <span class="token variable">$multiply</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"<span class="token variable">$ctc</span>"</span>,
+        <span class="token punctuation">{</span>
+          <span class="token variable">$divide</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+            <span class="token string">"<span class="token variable">$pf</span>"</span>,
+            <span class="token number">100</span>
+          <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>,
+    hraAnnualCalc: <span class="token punctuation">{</span>
+      <span class="token variable">$multiply</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"<span class="token variable">$ctc</span>"</span>,
+        <span class="token punctuation">{</span>
+          <span class="token variable">$divide</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+            <span class="token string">"<span class="token variable">$hra</span>"</span>,
+            <span class="token number">100</span>
+          <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>,
+    basicAnnualCalc: <span class="token punctuation">{</span>
+      <span class="token variable">$multiply</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"<span class="token variable">$ctc</span>"</span>,
+        <span class="token punctuation">{</span>
+          <span class="token variable">$divide</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+            <span class="token string">"<span class="token variable">$basic</span>"</span>,
+            <span class="token number">100</span>
+          <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>,
+    varaiblePayOut: <span class="token punctuation">[</span>
+      <span class="token number">2</span>,
+      <span class="token number">9</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>,
+<span class="token punctuation">{</span>
+  <span class="token variable">$addFields</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+    otherAnnualCalc: <span class="token punctuation">{</span>
+      <span class="token variable">$subtract</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"<span class="token variable">$ctc</span>"</span>,
+        <span class="token punctuation">{</span>
+          <span class="token variable">$add</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+            <span class="token string">"<span class="token variable">$variableAnnualCalc</span>"</span>,
+            <span class="token string">"<span class="token variable">$gratuityAnnualCalc</span>"</span>,
+            <span class="token string">"<span class="token variable">$hraAnnualCalc</span>"</span>,
+            <span class="token string">"<span class="token variable">$pfAnnualCalc</span>"</span>,
+            <span class="token string">"<span class="token variable">$basicAnnualCalc</span>"</span>,
+            <span class="token string">"<span class="token variable">$lta</span>"</span>
+          <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>,
+    
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>,
+<span class="token punctuation">{</span>
+  <span class="token variable">$addFields</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+    totalAnnualEstimate: <span class="token punctuation">{</span>
+      <span class="token variable">$add</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"<span class="token variable">$variableAnnualCalc</span>"</span>,
+        <span class="token string">"<span class="token variable">$gratuityAnnualCalc</span>"</span>,
+        <span class="token string">"<span class="token variable">$hraAnnualCalc</span>"</span>,
+        <span class="token string">"<span class="token variable">$pfAnnualCalc</span>"</span>,
+        <span class="token string">"<span class="token variable">$basicAnnualCalc</span>"</span>,
+        <span class="token string">"<span class="token variable">$lta</span>"</span>,
+        <span class="token string">"<span class="token variable">$otherAnnualCalc</span>"</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>,
+    
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>,
+//    <span class="token punctuation">{</span>
+//        <span class="token variable">$addFields</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+//            othersAnnualCalc: <span class="token punctuation">{</span> <span class="token variable">$subtract</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token string">"<span class="token variable">$ctc</span>"</span>, <span class="token punctuation">{</span> <span class="token variable">$add</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token string">"<span class="token variable">$basicAnnualCalc</span>"</span>, <span class="token string">"<span class="token variable">$hraAnnualCalc</span>"</span>, <span class="token string">"<span class="token variable">$lta</span>"</span>,<span class="token string">"<span class="token variable">$varaibleAnnualCalc</span>"</span>,$<span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">]</span> <span class="token punctuation">}</span>
+//        <span class="token punctuation">}</span>
+//
+//    <span class="token punctuation">}</span>,
+<span class="token punctuation">{</span>
+  <span class="token variable">$lookup</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+    from: <span class="token string">"userWorkInfo"</span>,
+    localField: <span class="token string">"id"</span>,
+    foreignField: <span class="token string">"id"</span>,
+    as: <span class="token string">"empPay"</span>
+  <span class="token punctuation">}</span>,
+  
+<span class="token punctuation">}</span>,
+<span class="token punctuation">{</span>
+  <span class="token variable">$lookup</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+    from: <span class="token string">"userInfo"</span>,
+    localField: <span class="token string">"id"</span>,
+    foreignField: <span class="token string">"id"</span>,
+    as: <span class="token string">"empInfo"</span>
+  <span class="token punctuation">}</span>,
+  
+<span class="token punctuation">}</span>,
+<span class="token punctuation">{</span>
+  <span class="token variable">$set</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+    <span class="token string">"userInfo"</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+      <span class="token variable">$arrayElemAt</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"<span class="token variable">$empPay</span>"</span>,
+        <span class="token number">0</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>,
+    <span class="token string">"userWorkInfo"</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+      <span class="token variable">$arrayElemAt</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"<span class="token variable">$empInfo</span>"</span>,
+        <span class="token number">0</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>,
+<span class="token punctuation">{</span>
+  <span class="token variable">$unset</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+    <span class="token string">"empInfo"</span>,
+    <span class="token string">"empPay"</span>,
+    <span class="token string">"_id"</span>,
+    <span class="token string">"userWorkInfo._id"</span>,
+    <span class="token string">"userInfo._id"</span>,
+    <span class="token string">"gratutity"</span>,
+    <span class="token string">"hra"</span>,
+    <span class="token string">"pf"</span>,
+    <span class="token string">"varaiblePayOut"</span>,
+    <span class="token string">"basic"</span>,
+    
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>,
+
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></div>
+</details>
+<p>:::</p>
+</div></template>
+
+
